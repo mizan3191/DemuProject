@@ -1,0 +1,56 @@
+﻿@model CreateUserModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">User Informations</h4>
+        </div>
+        <form asp-action="Index" asp-antiforgery="true" asp-controller="Home" method="post" class="form-horizontal">
+            <div asp-validation-summary="All" class="text-danger"> </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Name">Name</label>
+                            <input asp-for="Name" type="text" class="form-control" id="basicInput"
+                                placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Address" class="form-label">Address</label>
+                            <textarea asp-for="Address" class="form-control" id="exampleFormControlTextarea1"
+                                rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="number">Number</label>
+                            <input asp-for="number" type="text" class="form-control" id="basicInput"
+                                placeholder="Phone Number">
+                        </div>
+                       @* <div class="form-group">
+                            <label asp-for="Photo" for="formFile" class="form-label">Image</label>
+                            <input asp-for="Photo" class="form-control" type="file" id="formFile">
+                        </div>*@
+                        <div class="input-group">
+                            <fieldset class="form-group">
+                                <select class="form-select" id="basicSelect">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Others</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-info">Create</button>
+                <button asp-action="Index" asp-controller="Home" class="btn btn-warning float-right">Cancel</button>
+            </div>
+        </form>
+    </div>
+</section>

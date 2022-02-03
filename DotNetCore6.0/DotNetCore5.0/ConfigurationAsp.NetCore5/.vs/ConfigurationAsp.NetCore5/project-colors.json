@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "4d0d07ad-205e-4b73-a60c-5dd3f3a0c082": {
+      "ProjectGuid": "4d0d07ad-205e-4b73-a60c-5dd3f3a0c082",
+      "DisplayName": "Configuration.Web",
+      "ColorIndex": 0
+    },
+    "7cc14e20-de74-4aa7-88c3-7934e16d406d": {
+      "ProjectGuid": "7cc14e20-de74-4aa7-88c3-7934e16d406d",
+      "DisplayName": "Configuration.Membership",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

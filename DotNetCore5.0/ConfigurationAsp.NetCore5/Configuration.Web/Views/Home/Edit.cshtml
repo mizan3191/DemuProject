@@ -1,0 +1,84 @@
+﻿@model UpdateProfileModel
+@{
+    ViewData["Title"] = "Update";
+}
+
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
+
+<div class="page-heading">
+    <section id="basic-horizontal-layouts">
+        <div class="row match-height">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Profile Update Form</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form-horizontal" enctype="multipart/form-data" method="post" asp-controller="Profile"
+                                  asp-action="Update" asp-antiforgery="true">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="card-body">
+                                    <div class="col-md-4">
+                                        <label asp-for="FormFile">Profile Picture</label>
+                                        <div class="">
+                                            <img class="profile-user-img img-fluid img-circle"
+                                                 @*src="~/@Model.Photo"*@
+                                                 alt="User profile picture" style="padding-bottom:10px;padding-top:5px;">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <input type="file" class="form-control" asp-for="FormFile"
+                                               id="form-file" accept="image/*" placeholder="Profile Picture">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="FullName">Full Name</label>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <input type="text" class="form-control" asp-for="FullName"
+                                               id="full-name" placeholder="Full Name">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="PhoneNumber">Phone Number</label>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <input type="text" class="form-control" asp-for="PhoneNumber"
+                                               id="phone-number" placeholder="Phone Number">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="BloodGroup">Blood Group</label>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <input type="text" class="form-control" asp-for="BloodGroup"
+                                               id="blood-group" placeholder="Blood Group">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="Address">Address</label>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <input type="text" class="form-control" asp-for="Address"
+                                               id="address" placeholder="Address">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 d-flex justify-content-end">
+                                    <button type="submit"
+                                            class="btn btn-primary me-1 mb-1">
+                                        Update
+                                    </button>
+                                    <button type="reset"
+                                            class="btn btn-light-secondary me-1 mb-1">
+                                        Reset
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
