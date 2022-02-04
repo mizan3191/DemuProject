@@ -5,9 +5,9 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 
-namespace Configuration.Web.Models
+namespace Configuration.Web.Controllers
 {
-    public class DataTablesAjaxRequestModel
+    public class DataTablesAjaxRequestModel 
     {
         private HttpRequest _request;
 
@@ -15,29 +15,14 @@ namespace Configuration.Web.Models
         {
             get
             {
-                var method = _request.Method.ToLower();
-
-                if (method == "get")
-                    return Convert.ToInt32(_request.Query["start"]);
-                else if(method == "post")
-                    return Convert.ToInt32(_request.Form["start"]);
-                else
-                    throw new InvalidOperationException("Http method not supported, use get or post");
+                return Convert.ToInt32(_request.Query["start"]);
             }
         }
-
         public int Length
         {
             get
             {
-                var method = _request.Method.ToLower();
-
-                if (method == "get")
-                    return Convert.ToInt32(_request.Query["length"]);
-                else if(method == "post")
-                    return Convert.ToInt32(_request.Form["length"]);
-                else
-                    throw new InvalidOperationException("Http method not supported, use get or post");
+                return Convert.ToInt32(_request.Query["length"]);
             }
         }
 
@@ -102,7 +87,7 @@ namespace Configuration.Web.Models
                 throw new InvalidOperationException("Http method not supported, use get or post");
         }
 
-        private string ReadValues(IEnumerable<KeyValuePair<string, StringValues>>
+        private string ReadValues(IEnumerable<KeyValuePair<string, StringValues>> 
             requestValues, string[] columnNames)
         {
             var sortText = new StringBuilder();

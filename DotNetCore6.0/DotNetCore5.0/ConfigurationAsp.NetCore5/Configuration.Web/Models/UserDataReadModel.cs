@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Configuration.Membership.Services;
+using Configuration.Web.Controllers;
 using System;
 using System.Linq;
 
@@ -21,29 +22,30 @@ namespace Configuration.Web.Models
             _service = _scope.Resolve<IGroupService>();
         }
 
-        internal object GetAllUserList(DataTablesAjaxRequestModel ajax)
-        {
-            var data = _service.GetAllGroup(
-               ajax.PageIndex,
-               ajax.PageSize,
-               ajax.SearchText,
-               ajax.GetSortText(new string[] { "Name", "Address", "CreateDate", "number" })
-               );
+        //internal object GetAllUserList(DataTablesAjaxRequestModel ajax)
+        //{
+        //    var data = _service.GetAllUser(
+        //       ajax.PageIndex,
+        //       ajax.PageSize,
+        //       ajax.SearchText,
+        //       ajax.GetSortText(new string[] { "Name", "Address", "number", "CurrentDateTime", "Gender" }));
 
-            return new
-            {
-                recordsTotal = data.total,
-                recordsFiltered = data.totalDisplay,
-                data = (from record in data.records
-                        select new string[]
-                        {
-                            record.Name,
-                            record.Address,
-                            record.number.ToString(),
-                            record.CurrentDateTime.ToString(),
-                            record.Id.ToString(),
-                        }).ToArray()
-            };
-        }
+        //    return new
+        //    {
+        //        recordsTotal = data.total,
+        //        recordsFiltered = data.totalDisplay,
+        //        data = (from record in data.records
+        //                select new string[]
+        //                {
+        //                        record.Name,
+        //                        record.Address,
+        //                        record.number.ToString(),
+        //                        record.CurrentDateTime.ToString(),
+        //                        record.Gender,
+        //                        record.Id.ToString()
+        //                }
+        //            ).ToArray()
+        //    };
+        //}
     }
 }

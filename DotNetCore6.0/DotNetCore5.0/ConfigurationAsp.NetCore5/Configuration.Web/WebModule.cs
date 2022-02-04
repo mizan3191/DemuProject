@@ -9,6 +9,8 @@ namespace Configuration.Web
         {
             builder.RegisterType<CreateUserModel>().AsSelf();
             builder.RegisterType<EditUserModel>().AsSelf();
+            builder.RegisterType<UserDataReadModel>().AsSelf();
+            builder.RegisterType<TableModel>().AsSelf();
 
             base.Load(builder);
         }

@@ -52,14 +52,14 @@ namespace Configuration.Web.Controllers
             var model = _scope.Resolve<UserDataReadModel>();
             return View(model);
         }
-        public JsonResult GetAllUsers()
-        {
-            var ajax = new DataTablesAjaxRequestModel(Request);
-            var model = _scope.Resolve<UserDataReadModel>();
+        //public JsonResult GetAllUsers()
+        //{
+        //    var ajax = new DataTablesAjaxRequestModel(Request);
+        //    var model = _scope.Resolve<UserDataReadModel>();
 
-            var data = model.GetAllUserList(ajax);
-            return Json(data);
-        }
+        //    var data = model.GetAllUserList(ajax);
+        //    return Json(data);
+        //}
 
 
         public IActionResult Edit()

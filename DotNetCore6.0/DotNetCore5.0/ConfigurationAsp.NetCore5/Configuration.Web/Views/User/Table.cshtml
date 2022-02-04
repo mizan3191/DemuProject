@@ -1,0 +1,114 @@
+﻿@model TableModel
+@{
+    ViewData["Title"] = "Index";
+}
+@section Styles
+{
+    <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Available Courses</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Courses</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">All Available Courses</h3>
+                </div>
+                <div class="card-body">
+                    <table id="courses" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Number</th>
+                                <th>CurrentDateTime</th>
+                                <th>Gender</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Number</th>
+                                <th>CurrentDateTime</th>
+                                <th>Gender</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    @*<partial name="_DeletePopupPartial" />*@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script src="/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script>
+        $(function () {
+            $('#courses').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "https://localhost:44384/api/course",
+                    "headers": {
+                        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2aWV3X3Blcm1pc3Npb24iOiJ0cnVlIiwibmJmIjoxNjMyMjA4ODM5LCJleHAiOjE2MzI4MTM2MzksImlhdCI6MTYzMjIwODgzOSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzMjIiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo0NDMyMiJ9.Ya9JAHf905d47Pxq_pZnDGYHN5enbSmUNPLEUBJ8BDY"
+                    },
+                },
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": 5,
+                        "render": function (data, type, row) {
+                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/user/edit/${data}'" value='${data}'>
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Edit
+                                    </button>
+                                    <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Delete
+                                    </button>`;
+                        }
+                    }
+                ]
+                
+            });
+
+            $('#courses').on('click', '.show-bs-modal', function (event) {
+                var id = $(this).data("id");
+                var modal = $("#modal-default");
+                modal.find('.modal-body p').text('Are you sure you want to delete this record?')
+                $("#deleteId").val(id);
+                $("#deleteForm").attr("action", "/user/delete")
+                modal.modal('show');
+            });
+
+            $("#deleteButton").click(function () {
+                $("#deleteForm").submit();
+            });
+        });
+    </script>
+}

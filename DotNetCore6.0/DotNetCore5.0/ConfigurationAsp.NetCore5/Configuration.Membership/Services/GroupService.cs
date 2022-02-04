@@ -36,24 +36,47 @@ namespace Configuration.Membership.Services
             _unitOfWork.Save();
         }
 
-        public (IList<UserInformation> records, int total, int totalDisplay) GetAllGroup(
-            int pageIndex, int pageSize, string searchText, string sortText)
+        public (IList<UserInformation> records, int total, int totalDisplay) GetUsers(int pageIndex, int pageSize,
+            string searchText, string sortText)
         {
-            var createData = _unitOfWork.UserInformationRepository.GetDynamic(
-               string.IsNullOrWhiteSpace(searchText) ? null : x => x.Name.Contains(searchText),
-               sortText, null, pageIndex, pageSize);
+            var courseData = _unitOfWork.UserInformationRepository.GetDynamic(
+                string.IsNullOrWhiteSpace(searchText) ? null : x => x.Name.Contains(searchText),
+                sortText, null, pageIndex, pageSize) ;
 
-            var resultData = (from create in createData.data
+            var resultData = (from create in courseData.data
                               select new UserInformation
                               {
                                   Name = create.Name,
                                   number = create.number,
                                   Address = create.Address,
-                                  CurrentDateTime=create.CurrentDateTime,
+                                  CurrentDateTime = create.CurrentDateTime,
                                   Id = create.Id
                               }).ToList();
 
-            return (resultData, createData.total, createData.totalDisplay);
+            return (resultData, courseData.total, courseData.totalDisplay);
         }
+
+        //public (IList<UserInformation> records, int total, int totalDisplay) GetAllUser(
+        //    int pageIndex, int pageSize, string searchText, string sortText)
+        //{
+        //    var createData = _unitOfWork.UserInformationRepository.GetDynamic(
+        //        string.IsNullOrWhiteSpace(searchText) ? null : x => x.Name.Contains(searchText),
+        //        sortText, null, pageIndex, pageSize);
+
+        //    var resultData = (from create in createData.data
+        //                      select new UserInformation
+        //                      {
+        //                          Name = create.Name,
+        //                          number = create.number,
+        //                          Address = create.Address,
+        //                          CurrentDateTime=create.CurrentDateTime,
+        //                          Id = create.Id
+        //                      }).ToList();
+
+        //var resultData = (from course in courseData.data
+        //                  select _mapper.Map<Course>(course)).ToList();
+
+        //    return (resultData, createData.total, createData.totalDisplay);
+        //}
     }
 }
